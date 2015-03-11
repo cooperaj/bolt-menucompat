@@ -1,0 +1,36 @@
+{
+    "name": "cooperaj/bolt-breadcrumbs",
+    "description": "Renders a breadcrumb based on your menu",
+    "type": "bolt-extension",
+    "keywords" : [
+        "menu",
+        "breadcrumb"
+    ],
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Cooper", 
+            "email": "adam@networkpie.co.uk"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\Cooperaj\\Breadcrumb\\": [
+                "",
+                "src"
+            ]
+        }
+    },
+    "extra": {
+        "bolt-assets": "assets",
+        "branch-alias" : {
+            "dev-master" : "1.0.*-dev"
+        }
+    }
+}
