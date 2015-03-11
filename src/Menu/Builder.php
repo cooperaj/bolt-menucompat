@@ -25,15 +25,21 @@ class Builder
         $menus = $this->app['config']->get('menu');
 
         if (!empty($identifier) && isset($menus[$identifier])) {
+            $name = strtolower($identifier);
             $menu = $menus[$identifier];
         } else {
+            $name = strtolower(\utilphp\util::array_first_key($menus));
             $menu = \utilphp\util::array_first($menus);
         }
 
-        if (!$resolved)
-            return $menu;
+        if (!is_array($menu)) {
+            $menu = array();
+        }
 
-        return $this->resolve($menu);
+        if (!$resolved)
+            return new Menu($name, $menu);
+
+        return new Menu($name, $this->resolve($menu), true);
     }
 
     public function resolve(array $menu)
