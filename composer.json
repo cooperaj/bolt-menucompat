@@ -21,7 +21,7 @@
             "init.php"
         ],
         "psr-4": {
-            "Bolt\\Extension\\Cooperaj\\Breadcrumb\\": [
+            "Bolt\\Extension\\Cooperaj\\MenuCompat\\": [
                 "",
                 "src"
             ],
