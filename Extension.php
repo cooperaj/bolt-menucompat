@@ -3,6 +3,7 @@
 namespace Bolt\Extension\Cooperaj\MenuCompat;
 
 use Bolt\BaseExtension;
+use Bolt\Provider\MenuServiceProvider;
 
 class Extension extends BaseExtension
 {
@@ -27,7 +28,7 @@ class Extension extends BaseExtension
 
     public function initialize()
     {
-
+        $this->app->register(new MenuServiceProvider());
     }
 }
 
