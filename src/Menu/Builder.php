@@ -76,14 +76,13 @@ class Builder
     private function menuHelper($item)
     {
         // recurse into submenu's
-        if (isset($item['submenu']) && is_array($item['submenu'])) {
+        if (isset($item['submenu']) && is_array($item['submenu']))
             $item['submenu'] = $this->menuHelper($item['submenu']);
-        }
 
         if (isset($item['route'])) {
 
-            $param = empty($item['param']) ? array() : $item['param'];
-            $add = empty($item['add']) ? '' : $item['add'];
+            $param = !empty($item['param']) ?: array();
+            $add = !empty($item['add']) ?: '';
 
             $item['link'] = Lib::path($item['route'], $param, $add);
 
@@ -97,9 +96,8 @@ class Builder
 
     private function resolvePathToContent($item)
     {
-        // path is the homepage.
-        if ($item['path'] == "homepage") {
-            $item['link'] = $this->app['paths']['root'];
+        if ($item['path'] === 'homepage') {
+            $item['link'] = $this->app['resources']->getUrl('root');
 
             return $item;
         }
@@ -153,14 +151,16 @@ class Builder
 
     private function populateItemFromRecord($item, $path)
     {
+        /** @var \Bolt\Content $content */
         $content = $this->app['storage']->getContent($path);
-        if ($content instanceof \Bolt\Content) {
+
+        if ($content !== false) {
             if (empty($item['label'])) {
-                $item['label'] = !empty($content->values['title']) ? $content->values['title'] : "";
+                $item['label'] = !empty($content->values['title']) ?: '';
             }
 
             if (empty($item['title'])) {
-                $item['title'] = !empty($content->values['subtitle']) ? $content->values['subtitle'] : "";
+                $item['title'] = !empty($content->values['subtitle']) ?: '';
             }
 
             $item['link'] = $content->link();
